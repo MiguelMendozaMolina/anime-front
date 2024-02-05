@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-// Asegúrate de que el archivo de estilos exista y esté correctamente referenciado
 import styles from './CharacterStatus.module.css';
 
 interface CharacterStatus {
   characterName: string;
   totalLikes: number;
   totalDislikes: number;
-  imageUrl?: string; // Si tu API devuelve una URL de imagen, asegúrate de que este campo esté presente
+  imageUrl?: string; 
 }
 
 const CharacterStatus: React.FC = () => {
@@ -16,14 +15,20 @@ const CharacterStatus: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
 
   const fetchCharacterStatus = async () => {
+    const apiUrlPath = process.env.NEXT_PUBLIC_URL_PATH_DEFAULT;
+    const pathCharacterStatus= process.env.NEXT_PUBLIC_PATH_CHARACTER_STATUS
+    if (!apiUrlPath || !pathCharacterStatus) {
+      console.error("characterStatus is not defined. apiUrlPath:", apiUrlPath, "pathCharacterStatus:", pathCharacterStatus);
+      return; 
+    }
     try {
-      const response = await axios.get(`http://localhost:3001/characters/status/${characterName}`);
-      setStatus(response.data); // Asume que la respuesta de la API tiene la estructura de CharacterStatus
-      setError(null); // Resetea cualquier error previo
+      const response = await axios.get(`${apiUrlPath}${pathCharacterStatus}${characterName}`);
+      setStatus(response.data); 
+      setError(null); 
     } catch (error) {
       console.error('Error fetching character status:', error);
-      setStatus(null); // Limpia el estado anterior en caso de error
-      setError('Personaje no encontrado o error en la solicitud.'); // Establece el mensaje de error
+      setStatus(null); 
+      setError('Es necesario que ingreses el nombre del personaje'); 
     }
   };
 

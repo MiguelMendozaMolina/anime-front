@@ -1,7 +1,7 @@
-// components/CharacterCard.tsx (Asegúrate de que la ruta sea correcta según tu estructura de proyecto)
 import React from 'react';
 import styles from './CharacterCard.module.css';
 import axios from 'axios';
+
 
 interface Character {
   name: string;
@@ -9,10 +9,18 @@ interface Character {
 }
 
 const CharacterCard: React.FC<{ character: Character }> = ({ character }) => {
-  // logica para manejar los votos 
+  // logic for handling votes
+
+  const apiUrlPath = process.env.NEXT_PUBLIC_URL_PATH_DEFAULT;
+  const pathCharacterVote = process.env.NEXT_PUBLIC_PATH_CHARACTER_VOTE
   const handleVote = async (voteType: 'like'| 'dislike') => {
+
+    if (!apiUrlPath || !pathCharacterVote) {
+      console.error("characterVoteURL is not defined. apiUrlPath:", apiUrlPath, "pathCharacterVote:", pathCharacterVote);
+      return;
+    }
     try {
-      await axios.post('http://localhost:3001/characters/vote', {
+      await axios.post( `${apiUrlPath}${pathCharacterVote}` , {
         characterId: character.name,
         voteType: voteType,
         imageUrl: character.image
@@ -30,7 +38,7 @@ const CharacterCard: React.FC<{ character: Character }> = ({ character }) => {
     <div className={styles.card}>
       <img src={character.image} alt={character.name} className={styles.image} />
       <h2 className={styles.name}>{character.name}</h2>
-      <div className={styles.buttons}> {/* Envuelve los botones en un div con la clase .buttons */}
+      <div className={styles.buttons}>
         <button onClick={() => handleVote('like')} className={`${styles.voteButton} ${styles.like}`}>Like</button>
         <button onClick={() => handleVote('dislike')} className={`${styles.voteButton} ${styles.dislike}`}>Dislike</button>
       </div>

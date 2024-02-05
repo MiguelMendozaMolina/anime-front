@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import styles from './MostDisliked.module.css'; // Asegúrate de tener estilos apropiados para este componente
+import styles from './MostDisliked.module.css'; 
 
 interface CharacterVote {
   characterId: string;
@@ -13,22 +13,27 @@ export default function MostDisliked() {
 
   useEffect(() => {
     const fetchMostDislikedCharacter = async () => {
+      const apiUrlPath = process.env.NEXT_PUBLIC_URL_PATH_DEFAULT;
+      const pathMostDisliked= process.env.NEXT_PUBLIC_PATH_MOST_DISLIKED
+
+      if (!apiUrlPath || !pathMostDisliked) {
+        console.error("mostDisliked is not defined. apiUrlPath:", apiUrlPath, "pathMostDisliked:", pathMostDisliked);
+        return; 
+      }
       try {
-        // Asegúrate de que el endpoint corresponda al de tu backend para "most-disliked"
-        const response = await axios.get('http://localhost:3001/characters/most-disliked');
-        setMostDisliked(response.data); // Guarda la respuesta en el estado
+        const response = await axios.get(`${apiUrlPath}${pathMostDisliked}`);
+        setMostDisliked(response.data); 
       } catch (error) {
         console.error('Error fetching most disliked character:', error);
-        setMostDisliked(null); // En caso de error, limpia el estado
+        setMostDisliked(null); 
       }
     };
 
-    fetchMostDislikedCharacter(); // Llama a la función al montar el componente
-  }, []); // Un arreglo vacío como segundo argumento para ejecutar solo una vez
+    fetchMostDislikedCharacter(); 
+  }, []); 
 
-  if (!mostDisliked) return <div>No hay personajes con "dislike" recientes.</div>; // Renderiza esto si no hay datos
+  if (!mostDisliked) return <div>No hay personajes con "dislike" recientes.</div>;
 
-  // Renderiza los detalles del personaje más "dislikeado" si existe
   return (
     <div className={styles.card}>
       <img src={mostDisliked.imageUrl} alt={mostDisliked.characterId} className={styles.image} />

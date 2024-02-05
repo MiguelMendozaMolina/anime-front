@@ -1,12 +1,11 @@
-
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import styles from './MostLiked.module.css'; // Asegúrate de tener estilos apropiados para este componente
+import styles from './MostLiked.module.css';
 
 interface CharacterVote {
   characterId: string;
   imageUrl: string;
-  count: number; // Asumiendo que quieres mostrar el conteo de likes
+  count: number; 
 }
 
 export default function MostLiked() {
@@ -14,26 +13,31 @@ export default function MostLiked() {
 
   useEffect(() => {
     const fetchMostLikedCharacter = async () => {
+      const apiUrlPath = process.env.NEXT_PUBLIC_URL_PATH_DEFAULT;
+      const pathMostLiked= process.env.NEXT_PUBLIC_PATH_MOST_LIKED
+
+      if (!apiUrlPath || !pathMostLiked) {
+        console.error("mostLiked is not defined. apiUrlPath:", apiUrlPath, "pathMostLiked:", pathMostLiked);
+        return; 
+      }
       try {
-        const response = await axios.get('http://localhost:3001/characters/most-liked');
-        setMostLiked(response.data); // Guarda la respuesta en el estado
+        const response = await axios.get(`${apiUrlPath}${pathMostLiked}`);
+        setMostLiked(response.data); 
       } catch (error) {
         console.error('Error fetching most liked character:', error);
-        setMostLiked(null); // En caso de error, limpia el estado
+        setMostLiked(null); 
       }
     };
 
-    fetchMostLikedCharacter(); // Llama a la función al montar el componente
-  }, []); // Un arreglo vacío como segundo argumento para ejecutar solo una vez
+    fetchMostLikedCharacter(); 
+  }, []); 
 
-  if (!mostLiked) return <div>No hay personajes con "like" recientes.</div>; // Renderiza esto si no hay datos
+  if (!mostLiked) return <div>No hay personajes con "like" recientes.</div>; 
 
-  // Renderiza los detalles del personaje más "likeado" si existe
   return (
     <div className={styles.card}>
       <img src={mostLiked?.imageUrl} alt={mostLiked?.characterId} className={styles.image} />
       <h2 className={styles.name}>{mostLiked?.characterId}</h2>
-      {/* Asumiendo que quieres mostrar el conteo de likes, ajusta según tu respuesta de backend */}
       <p className={styles.voteCount}>Votos en likes: {mostLiked?.count}</p> 
     </div>
   );

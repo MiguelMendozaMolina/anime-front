@@ -14,22 +14,27 @@ export default function LastVote() {
 
   useEffect(() => {
     const fetchLastVotedCharacter = async () => {
+      const apiUrlPath = process.env.NEXT_PUBLIC_URL_PATH_DEFAULT;
+      const pathLastVote= process.env.NEXT_PUBLIC_PATH_LAST_VOTE
+
+      if (!apiUrlPath || !pathLastVote) {
+        console.error("lastVote is not defined. apiUrlPath:", apiUrlPath, "pathLastVote:", pathLastVote);
+        return; 
+      }
       try {
-        // Realiza la solicitud al endpoint proporcionado
-        const response = await axios.get('http://localhost:3001/characters/last-vote');
-        setLastVote(response.data); // Guarda la respuesta en el estado
+        const response = await axios.get(`${apiUrlPath}${pathLastVote}`);
+        setLastVote(response.data); 
       } catch (error) {
         console.error('Error fetching last voted character:', error);
-        setLastVote(null); // En caso de error, limpia el estado
+        setLastVote(null); 
       }
     };
 
-    fetchLastVotedCharacter(); // Llama a la función al montar el componente
-  }, []); // Un arreglo vacío como segundo argumento para ejecutar solo una vez
+    fetchLastVotedCharacter(); 
+  }, []); 
 
-  if (!lastVote) return <div>No hay votos recientes.</div>; // Renderiza esto si no hay datos
+  if (!lastVote) return <div>No hay votos recientes.</div>;
 
-  // Renderiza los detalles del último voto si existe
   return (
     <div className={styles.card}>
       <img src={lastVote.imageUrl} alt={lastVote.characterId} className={styles.image} />
