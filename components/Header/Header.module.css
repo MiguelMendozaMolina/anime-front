@@ -1,0 +1,93 @@
+/* Estilos Generales del Header */
+.header {
+  background-color: #209cee; /* Azul vibrante */
+  color: white;
+  padding: 1.5rem 0;
+  width: 100%;
+}
+
+.header-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.header-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 960px; /* Ajusta según la necesidad */
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Para alinear los elementos del título a la izquierda en pantallas grandes */
+@media (min-width: 768px) {
+  .header-container {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .container-title {
+    align-self: flex-start; /* Alinea el título a la izquierda */
+  }
+}
+
+.container-title {
+  text-align: left; /* Alinea el texto del título a la izquierda */
+}
+
+.title, .subtitle {
+  margin: 0.5rem 0; /* Ajusta el margen para un espaciado uniforme */
+}
+
+.title {
+  font-size: 2rem;
+}
+
+.subtitle {
+  font-size: 1.5rem;
+  font-weight: normal;
+  opacity: 0.9;
+}
+
+/* Estilos para los botones */
+.nav-buttons {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap; /* Permite que los botones se envuelvan en pantallas pequeñas */
+}
+
+.button {
+  padding: 10px 20px;
+  margin: 5px; /* Espacio alrededor de cada botón */
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: inline-flex; /* Usa flex para centrar el texto verticalmente */
+  justify-content: center;
+  align-items: center;
+  min-width: 120px; /* Ancho mínimo para los botones */
+  transition: background-color 0.3s ease;
+}
+
+.button:hover, .button:focus {
+  background-color: #0056b3;
+}
+
+/* Responsive Design: Ajustes para pantallas pequeñas */
+@media (max-width: 767px) {
+  .nav-buttons {
+    justify-content: center;
+    width: 100%;
+  }
+  .button {
+    margin: 10px; /* Aumenta el margen para una mejor visualización en dispositivos móviles */
+  }
+}

@@ -16,14 +16,38 @@
   }
 }
 
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%; /* Asegura que la página tome el ancho completo */
+}
 body {
-  color: rgb(var(--foreground-rgb));
+  /* Gradiente base que sugiere un cielo estrellado o el espacio, común en la ciencia ficción */
   background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+    to right,
+    #0f0c29, /* Oscuro azul/violeta, pensando en el espacio */
+    #302b63, /* Azul más claro, sugiriendo la profundidad del espacio */
+    #24243e /* Un tono que podría recordar a un cielo nocturno en una aventura Pokémon */
+  );
+
+  /* Agregar múltiples sombras de caja para simular portales o dimensiones, inspirado en Rick and Morty */
+  box-shadow:
+    0 0 0 4px rgba(255, 255, 0, 0.7), /* Amarillo brillante para el contorno del portal */
+    0 0 0 8px rgba(255, 0, 0, 0.5), /* Rojo para añadir un toque heroico de Marvel */
+    inset 0 0 10px 10px rgba(0, 255, 0, 0.4); /* Verde, evocando la locura de Rick and Morty */
+  
+  /* Establece la altura mínima para asegurarse de que el gradiente cubra toda la página */
+  min-height: 100vh;
+  
+  /* Alineación y justificación para centrar contenido */
+
+  /* Asegurarse de que el fondo se ajuste y no se repita */
+  background-repeat: no-repeat;
+  background-size: cover;
+  
+  /* Estilo adicional para mejorar la visualización */
+  color: white; /* Texto en blanco para contraste */
+  text-shadow: 2px 2px 4px #000000; /* Sombra en el texto para mejorar la legibilidad */
 }
 
 @layer utilities {

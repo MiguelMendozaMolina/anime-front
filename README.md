@@ -1,36 +1,65 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Proyecto de Votación de Personajes con Next.js
 
-## Getting Started
+Este proyecto Next.js permite a los usuarios votar por sus personajes favoritos de series como "Rick and Morty", "Pokemon" y "Superheroes". Los usuarios pueden ver el personaje más likes, el con más dislikes, el último votado, y buscar el estado de votación de personajes específicos.
 
-First, run the development server:
+## Características
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **Votación**: Los usuarios pueden votar "me gusta" o "no me gusta" por los personajes.
+- **Visualización**: Ver el personaje con más "likes", más "dislikes" y el último votado.
+- **Búsqueda**: Buscar personajes por nombre para ver sus totales de "likes" y "dislikes".
+
+## Tecnologías Utilizadas
+
+- [Next.js](https://nextjs.org/) para el framework frontend y SSR (Server-Side Rendering).
+- [React](https://reactjs.org/) para la construcción de UI.
+- [Axios](https://github.com/axios/axios) para solicitudes HTTP.
+- CSS Modules para estilos.
+
+## Estructura del Proyecto
+
 ```
+/proyecto
+├── components/ # Componentes reutilizables
+│ ├── CharacterCard/ # Tarjeta de personaje para votación
+│ │ ├── CharacterCard.tsx
+│ │ └── CharacterCard.module.css
+│ ├── Header/ # Encabezado y navegación
+│ │ ├── Header.tsx
+│ │ └── Header.module.css
+│ └── ...
+├── pages/ # Páginas de la aplicación
+│ ├── _app.tsx # Configuración global de la aplicación
+│ ├── index.tsx # Página de inicio
+│ ├── most-liked.tsx # Página para mostrar el personaje más "likeado"
+│ ├── most-disliked.tsx # Página para mostrar el personaje más "dislikeado"
+│ └── ...
+├── public/ # Activos estáticos como imágenes
+├── styles/ # Estilos globales
+│ └── globals.css
+└── README.md
+```
+## Cómo Empezar
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Para ejecutar este proyecto localmente, sigue estos pasos:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. **Clona el repositorio:**
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+git clone https://tu-repositorio.com/proyecto.git
 
-## Learn More
+2. **Instala las dependencias:**
 
-To learn more about Next.js, take a look at the following resources:
+cd proyecto
+npm install
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+3. **Ejecuta el servidor de desarrollo:**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+npm run dev
+Visita [http://localhost:3000](http://localhost:3000) en tu navegador.
 
-## Deploy on Vercel
+## Datos Importantes 
+Para poder ejecutar el proyecto es necesario contar con la version 
+V18.17.0 de Node.js la cual puedes descargar desde el siguiente link 
+https://nodejs.org/download/release/v18.17.0/
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Para poder utilizar distintos entornos de Node.js se recomienda el uso de NVM 
+https://desarrolloweb.com/home/nvm
