@@ -54,6 +54,6 @@
 .image {
   width: 300px;
   height: 300px;
-  object-fit: cover; /* Asegura que la imagen cubra completamente el área sin perder proporción */
+  object-fit: contain; /* Asegura que la imagen cubra completamente el área sin perder proporción */
   border-radius: 8px; /* Opcional: mantiene el borde redondeado */
 }
